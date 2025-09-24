@@ -1,8 +1,8 @@
 $ErrorActionPreference = 'Stop'
 
-$exeName = "manage.exe"
+$exeName = "mario.exe"
 $repoRawUrl = "https://raw.githubusercontent.com/Diamondman51/mario/main"
-$installDir = "$env:USERPROFILE\AppData\Local\Programs\teacher"
+$installDir = "$env:USERPROFILE\AppData\Local\Programs\teacher\"
 $exePath = "$installDir\$exeName"
 
 function InstallOrUpdate {
