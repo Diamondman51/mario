@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $exeName = "mario.exe"
-$repoUrl = "https://raw.githubusercontent.com/Diamondman51/mario/main/mario.exe"
+$repoRawUrl = "https://raw.githubusercontent.com/Diamondman51/mario/main"
 $installDir = "$env:USERPROFILE\AppData\Local\Programs\teacher"
 $exePath = "$installDir\$exeName"
 
@@ -12,7 +12,7 @@ function InstallOrUpdate {
         New-Item -ItemType Directory -Path $installDir | Out-Null
     }
 
-    $downloadUrl = "$repoUrl/$exeName"
+    $downloadUrl = "$repoRawUrl/$exeName"
     $tempPath = "$env:TEMP\$exeName"
 
     Invoke-WebRequest -Uri $downloadUrl -OutFile $tempPath -UseBasicParsing
@@ -46,7 +46,7 @@ InstallOrUpdate
 
 # Создаем задачу для автообновления
 $taskName = "TeacherAppAutoUpdate"
-$scriptUrl = "$repoUrl/install.ps1"
+$scriptUrl = "$repoRawUrl/install.ps1"
 $updateScriptPath = "$installDir\update.ps1"
 
 Invoke-WebRequest -Uri $scriptUrl -OutFile $updateScriptPath -UseBasicParsing
