@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $exeName = "teacher.exe"
-$repoUrl = "https://yourusername.github.io/teacher"
+$repoUrl = "https://diamondman51.github.io/mario/"
 $installDir = "$env:USERPROFILE\AppData\Local\Programs\teacher"
 $exePath = "$installDir\$exeName"
 
