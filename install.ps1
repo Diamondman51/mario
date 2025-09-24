@@ -43,26 +43,3 @@ function InstallOrUpdate {
 
 # Запускаем установку / обновление
 InstallOrUpdate
-
-# Создаем задачу для автообновления
-$taskName = "TeacherAppAutoUpdate"
-$scriptUrl = "$repoRawUrl/install.ps1"
-$updateScriptPath = "$installDir\update.ps1"
-
-Invoke-WebRequest -Uri $scriptUrl -OutFile $updateScriptPath -UseBasicParsing
-
-try {
-    $taskExists = schtasks /query /tn $taskName 2>$null
-} catch {
-    $taskExists = $null
-}
-
-if (!$taskExists) {
-    schtasks /create /tn $taskName /tr "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$updateScriptPath`"" /sc daily /st 09:00 /f
-    Write-Host "✅ Задача автообновления создана: $taskName (ежедневно в 09:00)"
-} else {
-    Write-Host "ℹ️ Задача автообновления уже существует"
-}
-
-Write-Host "`n🎉 Установка и настройка автообновления завершены!"
-Write-Host "🔁 Перезапусти терминал, если команда 'teacher' ещё не работает."
