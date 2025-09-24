@@ -1,7 +1,7 @@
 $ErrorActionPreference = 'Stop'
 
 $exeName = "mario.exe"
-$repoUrl = "https://diamondman51.github.io/mario/"
+$repoUrl = "https://raw.githubusercontent.com/Diamondman51/mario/main/mario.exe"
 $installDir = "$env:USERPROFILE\AppData\Local\Programs\teacher"
 $exePath = "$installDir\$exeName"
 
