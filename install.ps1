@@ -43,3 +43,4 @@ function InstallOrUpdate {
 
 # Запускаем установку / обновление
 InstallOrUpdate
+Start-Process "$exePath"
