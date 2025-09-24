@@ -51,7 +51,7 @@ $updateScriptPath = "$installDir\update.ps1"
 
 Invoke-WebRequest -Uri $scriptUrl -OutFile $updateScriptPath -UseBasicParsing
 
-$taskExists = schtasks /query /tn $taskName 2>$null
+$taskExists = schtasks /query /tn $taskName 2>$null || $null
 
 if (!$taskExists) {
     schtasks /create /tn $taskName /tr "powershell.exe -NoProfile -WindowStyle Hidden -ExecutionPolicy Bypass -File `"$updateScriptPath`"" /sc daily /st 09:00 /f
