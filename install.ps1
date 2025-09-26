@@ -2,8 +2,8 @@ $ErrorActionPreference = 'Stop'
 
 $exeName = "mario.exe"
 $repoRawUrl = "https://raw.githubusercontent.com/Diamondman51/mario/main"
-$installDir = "$env:USERPROFILE\AppData\Local\Programs\teacher\"
-$exePath = "$installDir\$exeName"
+$installDir = "$env:USERPROFILE\AppData\Local\Programs\teacher"
+$exePath = Join-Path $installDir $exeName
 
 function InstallOrUpdate {
     Write-Host "📦 Установка или обновление $exeName..."
@@ -13,9 +13,10 @@ function InstallOrUpdate {
     }
 
     $downloadUrl = "$repoRawUrl/$exeName"
-    $tempPath = "$env:TEMP\$exeName"
+    $tempPath = Join-Path $env:TEMP $exeName
 
-    Invoke-WebRequest -Uri $downloadUrl -OutFile $tempPath -UseBasicParsing
+    # ⚡ Качаем бинарь
+    Invoke-WebRequest -Uri $downloadUrl -OutFile $tempPath
 
     $needUpdate = $true
     if (Test-Path $exePath) {
@@ -29,6 +30,7 @@ function InstallOrUpdate {
 
     if ($needUpdate) {
         Copy-Item -Path $tempPath -Destination $exePath -Force
+        Unblock-File -Path $exePath
         Write-Host "✅ $exeName обновлён"
     }
 
@@ -43,4 +45,4 @@ function InstallOrUpdate {
 
 # Запускаем установку / обновление
 InstallOrUpdate
-Start-Process "$exePath"
+Start-Process $exePath
